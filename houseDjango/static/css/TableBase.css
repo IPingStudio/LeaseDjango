@@ -1,0 +1,79 @@
+/* CSS Document */
+
+body{
+	user-select: none;
+}
+.pageTab{
+	padding: 15px 0;
+	display: inline-block;
+	cursor: pointer;
+}
+.infoTableHead{
+	background-color: cornflowerblue;
+}
+/*信息展示表*/
+.infoTable td{
+	text-align: center;
+	padding: 1px 5px;
+}
+/*添加修改弹窗*/
+.addEditPopupDiv {
+	z-index: 100;
+	position:absolute;
+	top:50%;
+	left:50%;
+	display: none;
+	transform:translateX(-50%) translateY(-50%);
+	/*-moz-transform:translateX(-50%) translateY(-50%);
+	-webkit-transform:translateX(-50%) translateY(-50%);
+	-ms-transform:translateX(-50%) translateY(-50%);*/
+	border-radius:5px 5px 5px 5px;
+	/*box-shadow:3px 3px  10px blue;*/
+}
+/*添加修改弹窗标题栏*/
+.popupTopDiv{
+	display: flex;
+	width: auto;
+	height: 22px;
+	background-color: #AAAACC;
+	padding: 1px 3px;
+}
+/*添加修改弹窗主体*/
+.popupBodyDiv{
+	width: inherit; 
+	height: inherit; 
+	position: relative;
+	display: flex;
+	background-color: azure;
+	border-color: #DDD;
+	padding: 10px 10px;
+}
+/*添加修改弹窗表单Area*/
+.form_area{
+	width: 93%;
+	height: 100px;
+	resize: none;
+}
+.btnDiv{
+	position: absolute;
+	width: inherit;
+	bottom: 0;
+	height: 70px;
+	text-align: center;
+}
+/*添加修改弹窗按钮*/
+.form_btn{
+	text-align: center;
+}
+/*遮罩*/
+.Dialog-make{
+	width:100%;
+	height:100%;
+	filter:alpha(opacity=5);
+	opacity:.05;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:98;
+	background:#000
+}

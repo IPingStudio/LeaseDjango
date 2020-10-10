@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>房屋信息</title>
+	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+	<script type="text/javascript" src="/static/js/init.js"></script>
+	<script type="text/javascript" src="/static/js/TableBase.js"></script>
+	<script type="text/javascript" src="/static/js/InformationBase.js"></script>
+	<script type="text/javascript" src="/static/js/DragDiv.js"></script>
+	<script type="text/javascript" src="/static/js/PrintFile.js"></script>
+	<script type="text/javascript">
+		var modelName = 'house';
+		var dics;
+		var infoData;
+		var currentInfo;
+		window.onload = function(){
+			init();
+		}
+	</script>
+	<link href="/static/css/drag.css" rel="stylesheet" media="screen"/>
+	<link href="/static/css/TableBase.css" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+	{% extends 'users/base.html' %}
+	{% load bootstrap3 %}
+	{% load houseSimple %}
+	{% block content %}
+	<input id="dictsData" type="hidden" data="{{ dicts }}" />
+	<input id="infoData" type="hidden" data="{{ houseInfos }}" />
+	<div id="houseTableDiv" class="table-responsive">
+		<div>
+			<input id="addHouseBtn" class="btn btn-primary btn-lg" type="button" onClick="openHousePopup(this);" value="添加房屋信息"/>
+			<input id="editHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="openHousePopup(this);" onClick="" value="修改"/>
+			<input id="delHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="deleteHouseInfo()" value="删除"/>
+		</div>
+		<table id="houseInformationTalbe" class="table table-striped table-sm">
+			<thead class="infoTableHead">
+				<tr>
+					<th data="houseID">产籍号</th>
+					<th data="propertyID">产权证号</th>
+					<th data="houseOwner">产权人</th>
+					<th data="ownerPhone">联系电话</th>
+<!--					<th data="IDType" dictType="IDType">证件类型</th>-->
+<!--					<th data="IDNum">证件号码</th>-->
+					<th data="houseAdd">房屋坐落</th>
+					<th data="houseArea">房屋面积</th>
+					<th data="houseUse" dictType="houseUse">房屋用途</th>
+					<th data="houseStructure" dictType="houseStructure">房屋结构</th>
+					<th data="landArea">占地面积</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="popupMake" class="Dialog-make" style="display: none; z-index:98;"></div>
+	<div id="houseAddDiv" class="addEditPopupDiv" style="width: 500px; height: 580px; z-index: 99;">
+		<div id="houseAddTop" class="popupTopDiv" onMouseDown="divDragStart(event);" onMouseUp="divDragEnd(event);">
+			<label style="user-select: none; width: 200px; float: left; pointer-events: none;">房屋信息</label>
+			<span style="width: 100%; pointer-events: none;"></span>
+			<a onClick="closeHousePopup();" style="float: right; cursor: pointer; padding-right: 5px;">X</a>
+		</div>
+		<div class="popupBodyDiv">
+			<form id="houseForm" class="needs-validation" style="width: inherit; overflow-x: hidden; overflow-y: auto; margin-bottom: 70px;">
+				{% csrf_token %}
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="houseID">产籍号</label>
+						<input id="houseID" class="form-control" type="text" name="houseID"/>
+						<div class="invalid-feedback">
+							<span>{% error_msg form.error.username %}</span>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="propertyID">产权证号</label>
+						<input id="propertyID" class="form-control" type="text" name="propertyID"/>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="mb-3" style="height: 70px">
+					<label for="houseAdd">房屋坐落</label>
+					<input id="houseAdd" class="form-control" type="text" name="houseAdd"/>
+					<div class="invalid-feedback"></div>
+				</div>
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="houseUse">房屋用途</label>
+						<select id="houseUse" name="houseUse" class="form-control" form="houseForm"></select>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="houseStructure">房屋结构</label>
+						<select id="houseStructure" name="houseStructure" class="form-control" form="houseForm"></select>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="houseArea">房屋面积</label>
+						<input id="houseArea" class="form-control" type="text" name="houseArea"/>
+						<div class="invalid-feedback" style="width: 100%"></div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="landArea">占地面积</label>
+						<input id="landArea" class="form-control" type="text" name="landArea"/>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="houseOwner">产权人</label>
+						<input id="houseOwner" class="form-control" type="text" name="houseOwner"/>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="ownerPhone">联系电话</label>
+						<input id="ownerPhone" class="form-control" type="text" name="ownerPhone"/>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="IDType">证件类型</label>
+						<select id="IDType" name="IDType" class="form-control" form="houseForm"></select>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="IDNum">证件号码</label>
+						<input id="IDNum" class="form-control" type="text" name="IDNum"/>
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="row" style="height: 70px">
+					<div class="col-md-6 mb-3">
+						<label for="propertyType">产别</label>
+						<select id="propertyType" name="propertyType" class="form-control" form="houseForm"></select>
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="col-md-6 mb-3">
+					</div>
+				</div>
+			</form>
+			<div class="btnDiv row">
+				<input type="submit" class="btn btn-primary btn-lg" value="保存" onclick="submitHouse();"/>
+<!--				<input type="submit" class="btn btn-primary btn-lg" value="保存" form="houseForm"/>-->
+				<input type="button" class="btn btn-primary btn-lg" onClick="closeHousePopup();" value="取消"/>
+			</div>
+		</div>
+	</div>
+	{% endblock content %}
+</body>
+</html>

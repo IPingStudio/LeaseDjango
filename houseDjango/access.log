@@ -1,0 +1,2 @@
+2020-09-16 14:28:13 autoreload.run_with_reloader: Watching for file changes with StatReloader
+2020-09-16 14:34:07 autoreload.trigger_reload: E:\workSpace\HouseDjango\houseDjango\houseDjango\settings.py changed, reloading.

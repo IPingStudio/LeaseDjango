@@ -1,0 +1,32 @@
+[2020-09-16 15:02:58,812] [autoreload.py:612] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+[2020-09-16 15:05:14,269] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /lease HTTP/1.1" 301 0
+[2020-09-16 15:05:15,038] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /lease/ HTTP/1.1" 200 24161
+[2020-09-16 15:05:15,118] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/jquery.min.js HTTP/1.1" 200 72328
+[2020-09-16 15:05:15,177] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/init.js HTTP/1.1" 200 1808
+[2020-09-16 15:05:15,179] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/TableBase.js HTTP/1.1" 200 6815
+[2020-09-16 15:05:15,194] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/DragDiv.js HTTP/1.1" 200 606
+[2020-09-16 15:05:15,199] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/InformationBase.js HTTP/1.1" 200 4891
+[2020-09-16 15:05:15,238] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/PrintFile.js HTTP/1.1" 200 1607
+[2020-09-16 15:05:33,801] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/css/TableBase.css HTTP/1.1" 200 1160
+[2020-09-16 15:05:34,635] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /lease/ HTTP/1.1" 302 0
+[2020-09-16 15:05:34,847] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /user/login/?next=/lease/ HTTP/1.1" 200 3326
+[2020-09-16 15:12:01,947] [autoreload.py:236] [autoreload:trigger_reload] [INFO]- E:\workSpace\HouseDjango\houseDjango\house\views.py changed, reloading.
+[2020-09-16 15:12:05,232] [autoreload.py:612] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+[2020-09-16 15:12:27,466] [autoreload.py:236] [autoreload:trigger_reload] [INFO]- E:\workSpace\HouseDjango\houseDjango\house\views.py changed, reloading.
+[2020-09-16 15:12:31,579] [autoreload.py:612] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+[2020-09-16 15:24:55,820] [views.py:17] [views:showHouses] [INFO]- 请求成功！ response_code:{}；response_headers:{}；response_body:{}
+[2020-09-16 15:24:55,823] [views.py:19] [views:showHouses] [ERROR]- 请求出错：{}
+[2020-09-16 15:24:56,468] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET / HTTP/1.1" 200 15412
+[2020-09-16 15:24:56,690] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/init.js HTTP/1.1" 200 1808
+[2020-09-16 15:24:56,700] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/TableBase.js HTTP/1.1" 200 6554
+[2020-09-16 15:24:56,708] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/jquery.min.js HTTP/1.1" 200 72328
+[2020-09-16 15:24:56,728] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/InformationBase.js HTTP/1.1" 200 4891
+[2020-09-16 15:24:56,750] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/css/drag.css HTTP/1.1" 200 0
+[2020-09-16 15:24:56,758] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/css/TableBase.css HTTP/1.1" 200 1160
+[2020-09-16 15:24:56,784] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/DragDiv.js HTTP/1.1" 200 606
+[2020-09-16 15:24:56,786] [basehttp.py:157] [basehttp:log_message] [INFO]- "GET /static/js/PrintFile.js HTTP/1.1" 200 1607
+[2020-09-16 15:25:02,588] [log.py:230] [log:log_response] [WARNING]- Not Found: /favicon.ico
+[2020-09-16 15:25:02,595] [basehttp.py:157] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 3223
+[2020-09-16 15:39:57,389] [autoreload.py:236] [autoreload:trigger_reload] [INFO]- E:\workSpace\HouseDjango\houseDjango\houseDjango\urls.py changed, reloading.
+[2020-09-16 15:40:00,701] [autoreload.py:612] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader
+[2020-09-16 15:41:17,076] [autoreload.py:612] [autoreload:run_with_reloader] [INFO]- Watching for file changes with StatReloader

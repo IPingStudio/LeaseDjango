@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<!--	<img src="../../../static/images/leaseCardL.jpg" width="1049" height="746" alt=""/>	-->
+<!--	<img src="../../../static/images/leaseCard.jpg" width="1396" height="993" alt=""/> -->
+<!--
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 314px; left: 998px;'>194</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 370px; left: 330px;'>杨念慈</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 361px; left: 1110px;'>EF30-FE11_11EE</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 414px; left: 330px;'>王锡年</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 404px; left: 1110px;'>357.2</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 454px; left: 330px;'>海城市站前区战前小卖部</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 447px; left: 1110px;'>商用出租</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 255px;'>2020</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 360px;'>09</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 430px;'>24</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 530px;'>2025</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 623px;'>08</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 700px;'>22</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1000px;'>2020</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1110px;'>09</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1190px;'>30</span></b>
+-->
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 314px; left: 998px;'>194</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 370px; left: 330px;'>{{house.houseOwner}}</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 361px; left: 1110px;'>{{house.propertyID}}</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 414px; left: 330px;'>{{lease.leaseHolder}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 404px; left: 1110px;'>{{lease.leaseArea}}</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 454px; left: 330px;'>{{house.houseAdd}}</span></b>
+	<b><span lang=EN-US style='font-size:21.0pt; font-family:宋体; position: absolute; top: 447px; left: 1110px;'>{{houseUse}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 255px;'>{{lease.leaseStartTime.year}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 360px;'>{{lease.leaseStartTime.month}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 430px;'>{{lease.leaseStartTime.day}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 530px;'>{{lease.leaseEndTime.year}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 623px;'>{{lease.leaseEndTime.month}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 703px; left: 700px;'>{{lease.leaseEndTime.day}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1000px;'>{{localDate.tm_year}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1110px;'>{{localDate.tm_mon}}</span></b>
+	<b><span lang=EN-US style='font-size:19.0pt; font-family:宋体; position: absolute; top: 796px; left: 1190px;'>{{localDate.tm_mday}}</span></b>
+</body>
+</html>
