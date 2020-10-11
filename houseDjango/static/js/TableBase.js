@@ -119,10 +119,15 @@ function openLeasePopup(currentObj){
 		leaseFormEle.attr('action', "");
 		leaseFormEle.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
 		manageLeasePopupInfo();
-	}else if(currentObj.id === 'shenPiBtn' || currentObj.id === 'backBtn'){
+	}else if(currentObj.id === 'shenPiBtn'){
 		leaseFormEle.attr('action', "");
 		leaseFormEle.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
 		$('#shenPiBtnDiv').show();
+		manageLeasePopupInfo();
+	}else if(currentObj.id === 'backBtn'){
+		leaseFormEle.attr('action', "");
+		leaseFormEle.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
+		$('#tuiHuiBtnDiv').show();
 		manageLeasePopupInfo();
 	}
 	$('#leaseAddDiv').show();
