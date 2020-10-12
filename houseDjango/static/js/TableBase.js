@@ -291,19 +291,28 @@ function submitOnClick(typeLabel){
 }
 
 function shenPionClick(typeLabel){
-	statusArr = ['未审批', '未复审']
-	statusIDArr = []
+	//审批限制字段
+	shenPiStatusArr = ['未审批', '未复审'];
+	shenPiStatusIDArr = [];
+	//退回限制字段
+	backStatusArr = ['已审批'];
+	backStatusIDArr = [];
 	for(var index = 0; index < dics['leaseStatus'].length; index++){
 		var tempob = dics['leaseStatus'][index];
 		if(tempob.label === typeLabel){
 			dicValue = tempob.id;
-		}else if(statusArr.indexOf(tempob.label) !== -1){
-			statusIDArr.push(tempob.id);
+		}else if(shenPiStatusArr.indexOf(tempob.label) !== -1){
+			shenPiStatusIDArr.push(tempob.id);
+		}else if(backStatusArr.indexOf(tempob.label) !== -1){
+			backStatusIDArr.push(tempob.id);
 		}
 	}
 
-	if(statusIDArr.indexOf(currentInfo.leaseStatus) === -1){
+	if(typeLabel === '已审批' && shenPiStatusIDArr.indexOf(currentInfo.leaseStatus) === -1){
 		alert('只可以审批<状态>为<未审批,未复审>的记录！')
+		return
+	}else if(typeLabel === '未复审' && backStatusIDArr.indexOf(currentInfo.leaseStatus) === -1){
+		alert('只可以退回<状态>为<已审批>的记录！')
 		return
 	}
 
