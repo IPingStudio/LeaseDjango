@@ -469,6 +469,7 @@ function manageRealtyPopupInfo(){
 /*打开房屋信息添加窗口*/
 function openUserPopup(currentObj){
 	cleanUserAddPopup();
+	setUserPopup();
 	let userForm = $('#userForm');
 	if(currentObj.id === 'addUserBtn'){
 		userForm.attr('method', 'post');
@@ -483,10 +484,68 @@ function openUserPopup(currentObj){
 //	var houseAddDiv = document.getElementById("houseAddDiv");
 //	houseAddDiv.style.display = "block";
 }
+
+/*添加用户权限*/
+function userAuthorityAdd(){
+	let option = $('#user_authority_list option:selected');
+	if(!$(option).is(':selected')){
+		return;
+	}
+	let userAuthrityEle = $('#user_authority');
+	$(option).removeAttr('selected');
+	$(option).remove();
+	$(userAuthrityEle).append($(option));
+}
+
+/*删除用户权限*/
+function userAuthorityDel(){
+	let option = $('#user_authority option:selected');
+	if(!$(option).is(':selected')){
+		return;
+	}
+	let userAuthrityEle = $('#user_authority_list');
+	$(option).removeAttr('selected');
+	$(option).remove();
+	$(userAuthrityEle).append($(option));
+}
+
+/*提交用户信息*/
+function submitUser(){
+	let tempData = $('#userForm').serialize();
+	let url = $('#userForm').attr('action');
+	let userAuthority = '';
+	let userAuthorityOptions = $('#user_authority option');
+	for(index = 0; index < userAuthorityOptions.length; index++){
+		let currentOption = userAuthorityOptions[index];
+		userAuthority += $(currentOption).attr('value') + ',';
+	}
+	userAuthority = userAuthority.slice(0, userAuthority.length - 1);
+	tempData += '&authority=' + userAuthority;
+
+	$.ajax({
+		url: url,
+		type: 'post',
+		dataType: 'json',
+		data: tempData,
+		success: function (response) {
+			if (response !== 'nullValue') {
+
+			} else {
+				alert('保存失败');
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	})
+}
+function manageUserPopup(){
+
+}
 /*删除房屋数据*/
 function deleteUserInfo(){
 	r = confirm('确定删除<用户名>为<' + currentInfo.displayName + '>的用户数据吗？');
-	if(r == true){
+	if(r === true){
 		window.location.href="deleteUser/" + currentInfo.id + "/";
 	}else{
 
@@ -495,16 +554,54 @@ function deleteUserInfo(){
 /*关闭房屋信息添加窗口*/
 function closeUserPopup(){
 	cleanUserAddPopup();
-	$('#popupMake').hide()
-	$('#userAddDiv').hide()
+	$('#popupMake').hide();
+	$('#userAddDiv').hide();
 }
 /*处理房屋信息致弹窗数据*/
 function manageUserPopupInfo(){
-	for(var item in currentInfo){
+	for(let item in currentInfo){
 		if(item === 'password'){
 			continue;
 		}
+		if(item === 'authority'){
+			let authorityArr = currentInfo[item].split(',');
+			let userAuthorityOptions = $('#user_authority_list option');
+			let userAuthorityEle = $('#user_authority');
+			let currentOptions = [];
+
+			for(let index = 0; index < authorityArr.length; index++){
+				let currentUserAuthID = authorityArr[index];
+				currentUserAuthID = parseInt(currentUserAuthID);
+				for(let optionIndex = 0; optionIndex < userAuthorityOptions.length; optionIndex++){
+					let currentOption = userAuthorityOptions[optionIndex];
+					let optionValue = parseInt($(currentOption).attr('value'));
+					if(optionValue === currentUserAuthID){
+						$(currentOption).remove();
+						currentOptions.push(currentOption);
+					}
+				}
+			}
+
+			for(let optionIndex = 0; optionIndex < currentOptions.length; optionIndex++){
+				$(userAuthorityEle).append(currentOptions[optionIndex]);
+			}
+		}
 		manageInputElementValue(item, currentInfo[item]);
+	}
+}
+
+/*添加用户权限到列表池*/
+function setUserPopup(){
+	let userAuthoritySelect = $('#user_authority_list');
+	$(userAuthoritySelect).empty();
+	$('#user_authority').empty();
+	let userAuthDic = dics['userAuthority'];
+	for(index = 0; index < userAuthDic.length; index++){
+		let obj = userAuthDic[index];
+		let tempOp = document.createElement('option');
+		$(tempOp).attr('value', obj['id']);
+		$(tempOp).html(obj['label']);
+		$(userAuthoritySelect).append(tempOp);
 	}
 }
 

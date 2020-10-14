@@ -1,0 +1,9 @@
+.user_authority_container{
+    width: 610px;
+    height: 260px;
+    border: #5A5A5A solid 1px;
+}
+
+.user_authority{
+    float: left;
+}

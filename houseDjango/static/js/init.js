@@ -13,7 +13,7 @@ function init(){
 
 /*处理字典字段*/
 function setDict(){
-	var dictElement = document.getElementById('dictsData');
+	let dictElement = document.getElementById('dictsData');
 	ElementData = dictElement.getAttribute('data');
 	dics = $.parseJSON(ElementData.replace(/'/g, '\"'));
 	setSelectElement('houseUse', 'houseUse');
@@ -30,17 +30,17 @@ function setCurrentInfo(){
 	for(var index = 0; index < infoData.length; index++){
 		infoData[index]['fields']['id'] = infoData[index]['pk'];
 	}
-	if(modelName == 'house'){
+	if(modelName === 'house'){
 		manageHouseInfoData();
-	}else if(modelName == 'lease'){
+	}else if(modelName === 'lease'){
 		manageLeaseInfoData();
-	}else if(modelName == 'realty'){
+	}else if(modelName === 'realty'){
 		manageRealtyInfoData();
 	}else if(modelName === 'user'){
 		manageUserInfoData();
 	}
-	
 }
+
 /*动态处理下拉菜单*/
 function setSelectElement(id, type){
 	var currentE = document.getElementById(id);

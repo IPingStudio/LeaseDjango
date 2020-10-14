@@ -20,6 +20,7 @@
 		}
 	</script>
 	<link href="../static/css/drag.css" rel="stylesheet" media="screen"/>
+	<link href="../static/css/user.css" rel="stylesheet" media="screen"/>
 	<link href="../static/css/TableBase.css" rel="stylesheet" media="screen"/>
 </head>
 
@@ -42,7 +43,7 @@
 					<!--<th data="password">密码</th>-->
 					<th data="displayName">用户名</th>
 					<th data="telephone">联系电话</th>
-					<th data="authority">权限</th>
+					<th data="authority" dictType="userAuthority">权限</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,7 +52,7 @@
 	</div>
 
 	<div id="popupMake" class="Dialog-make" style="display: none; z-index: 98;"></div>
-	<div id="userAddDiv" class="addEditPopupDiv" style="width: 500px; height: 320px; z-index: 99;">
+	<div id="userAddDiv" class="addEditPopupDiv" style="width: 650px; height: 520px; z-index: 99;">
 		<div id="userAddTop" class="popupTopDiv" onMouseDown="divDragStart(event);" onMouseUp="divDragEnd(event);">
 			<label style="user-select: none; width: 200px; float: left; pointer-events: none;">用户信息</label>
 			<span style="width: 100%; pointer-events: none;"></span>
@@ -84,18 +85,42 @@
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
-				<div class="row" style="height: 70px">
-					<div class="col-md-6 mb-3">
-						<label for="authority">权限</label>
-						<select id="authority" name="authority" class="form-control"></select>
-						<div class="invalid-feedback"></div>
-					</div>
-					<div class="col-md-6 mb-3">
+				<div class="row">
+					<div class="col-md-6">
+						<label>用户权限:</label>
+						<div class="user_authority_container">
+							<div class="selector-chosen user_authority">
+								<label>可用 用户权限</label>
+								<p id="id_user_permissions_filter" class="selector-filter">
+									<input type="text" placeholder="过滤" id="id_user_permissions_input">
+								</p>
+								<select name="user_permissions_list" id="user_authority_list"
+										multiple="" class="filtered" style="width: 230px; height: 170px;">
+								</select>
+								<!--<a title="点击选择全部用户权限。" href="#" id="id_user_permissions_add_all_link"
+								   class="selector-chooseall active">全选</a>-->
+							</div>
+							<ul class="selector-chooser user_authority" style="list-style: none;">
+								<li><a title="选择" id="id_user_permissions_add_link"
+									   class="selector-add active" onclick="userAuthorityAdd();">选择》</a></li>
+								<li><a title="删除" id="id_user_permissions_remove_link"
+									   class="selector-remove" onclick="userAuthorityDel();">《删除</a></li>
+							</ul>
+							<div class="selector-chosen user_authority">
+								<label>选中的 用户权限</label>
+								<select id="user_authority" multiple="" size="0"
+										name="user_permissions" class="filtered" style="width: 230px; height: 170px;">
+								</select>
+								<!--<a title="删除所有已选择的用户权限。" href=""
+								   id="id_user_permissions_remove_all_link"
+								   class="selector-clearall">删除全部</a>-->
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>
 			<div class="btnDiv row">
-				<input type="submit" class="btn btn-primary btn-lg" value="保存" form="userForm"/>
+				<input type="submit" class="btn btn-primary btn-lg" value="保存" onclick="submitUser();"/>
 				<input type="button" class="btn btn-primary btn-lg" onClick="closeUserPopup();" value="取消"/>
 			</div>
 		</div>

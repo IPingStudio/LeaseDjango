@@ -56,12 +56,25 @@ function manageUserInfoData(){
 			var thData = currentTH.getAttribute("data");
 			if(dataJson.hasOwnProperty(thData)){
 				var dicType = currentTH.getAttribute('dictType');
-				if(dicType && dicType != ''){
-					for(var dicIndex = 0; dicIndex < dics[dicType].length; dicIndex++){
-						var currentdic = dics[dicType][dicIndex];
-						if(dataJson[thData] == currentdic.id){
-							tempTd.innerHTML = currentdic.label;
-							break;
+				if(dicType && dicType !== ''){
+					let dicArr = dataJson[thData].split(',');
+					if(dicArr.length <= 1){
+						tempTd.innerHTML = dicArr[0];
+					}else{
+						let returnStr = '';
+						for(let dicIndex = 0; dicIndex < dics[dicType].length; dicIndex++){
+							let currentdic = dics[dicType][dicIndex];
+							for(let arrIndex = 0; arrIndex <= dicArr.length; arrIndex++){
+								let currentData = dicArr[arrIndex];
+								currentData = parseInt(currentData);
+								if(currentData === currentdic.id){
+									returnStr += currentdic.label + ',';
+								}
+							}
+						}
+						if(returnStr !== ''){
+							returnStr = returnStr.slice(0, returnStr.length - 1);
+							tempTd.innerHTML = returnStr;
 						}
 					}
 				}else{
