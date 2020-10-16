@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, reverse
 from django.core import serializers
 
@@ -8,6 +8,8 @@ from tools.query import getDict
 
 from .models import userProfile
 from .forms import userProfileForm
+
+import json
 # Create your views here.
 
 
@@ -55,6 +57,8 @@ def addUser(request):
                 currentForm.save()
             else:
                 form.save()
+                context = {'status': 200}
+                return HttpResponse(json.dumps(context))
             return HttpResponseRedirect(reverse('user:user'))
 
     context = {'form': form}
@@ -71,7 +75,7 @@ def editUser(request, userID):
         form = userProfileForm(instance=tempUser, data=request.POST)
         if form.is_valid():
             currentPassword = request.POST.get('password')
-            if currentPassword == '':
+            if not currentPassword == '':
                 tempUser.set_password(currentPassword)
 
             disName = form.cleaned_data['displayName']
@@ -82,8 +86,22 @@ def editUser(request, userID):
                 currentForm.save()
             else:
                 form.save()
+                context = {'status': 200}
+                return HttpResponse(json.dumps(context))
             return HttpResponseRedirect(reverse('user:user'))
     return render(request, 'users/index.html', {'form': form})
+
+
+
+@login_required
+def deleteUser(request, userID):
+    # 编辑房屋信息
+    tempUser = userProfile.objects.get(id=userID)
+    if tempUser:
+        tempUser.delete()
+        return HttpResponseRedirect(reverse('user:user'))
+    else:
+        pass
 
 
 def searchUser(request):

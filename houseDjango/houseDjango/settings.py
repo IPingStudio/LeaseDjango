@@ -77,6 +77,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'userTool': 'users.templatetags.userTool',
+                'leaseTool': 'lease.templatetags.leaseTool',
+                'houseSimple': 'house.templatetags.houseSimple',
+            }
         },
     },
 ]
@@ -101,7 +106,10 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
-        'POST': 3306
+        'POST': 3306,
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        }
     }
 }
 
@@ -139,84 +147,83 @@ USE_L10N = True
 USE_TZ = False
 
 # set log
-# import time
-#
-# cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
-# log_path = os.path.join(os.path.dirname(cur_path), 'logs')
-# if not os.path.exists(log_path): os.mkdir(log_path)  # 如果不存在这个logs文件夹，就自动创建一个
-#
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'formatters': {
-#         # 日志格式
-#         'standard': {
-#             'format': '[%(asctime)s] [%(filename)s:%(lineno)d] [%(module)s:%(funcName)s] '
-#                       '[%(levelname)s]- %(message)s'},
-#         'simple': {  # 简单格式
-#             'format': '%(levelname)s %(message)s'
-#         },
-#     },
-#     # 过滤
-#     'filters': {
-#     },
-#     # 定义具体处理日志的方式
-#     'handlers': {
-#         # 默认记录所有日志
-#         'default': {
-#             'level': 'INFO',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': os.path.join(log_path, 'all-{}.log'.format(time.strftime('%Y-%m-%d'))),
-#             'maxBytes': 1024 * 1024 * 5,  # 文件大小
-#             'backupCount': 5,  # 备份数
-#             'formatter': 'standard',  # 输出格式
-#             'encoding': 'utf-8',  # 设置默认编码，否则打印出来汉字乱码
-#         },
-#         # 输出错误日志
-#         'error': {
-#             'level': 'ERROR',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': os.path.join(log_path, 'error-{}.log'.format(time.strftime('%Y-%m-%d'))),
-#             'maxBytes': 1024 * 1024 * 5,  # 文件大小
-#             'backupCount': 5,  # 备份数
-#             'formatter': 'standard',  # 输出格式
-#             'encoding': 'utf-8',  # 设置默认编码
-#         },
-#         # 控制台输出
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'standard'
-#         },
-#         # 输出info日志
-#         'info': {
-#             'level': 'INFO',
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'filename': os.path.join(log_path, 'info-{}.log'.format(time.strftime('%Y-%m-%d'))),
-#             'maxBytes': 1024 * 1024 * 5,
-#             'backupCount': 5,
-#             'formatter': 'standard',
-#             'encoding': 'utf-8',  # 设置默认编码
-#         },
-#     },
-#     # 配置用哪几种 handlers 来处理日志
-#     'loggers': {
-#         # 类型 为 django 处理所有类型的日志， 默认调用
-#         'django': {
-#             'handlers': ['default', 'console'],
-#             'level': 'INFO',
-#             'propagate': False
-#         },
-#         # log 调用时需要当作参数传入
-#         'log': {
-#             'handlers': ['error', 'info', 'console', 'default'],
-#             'level': 'INFO',
-#             'propagate': True
-#         },
-#     }
-# }
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
+import time
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}  #日志格式
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/all.log',     #日志输出文件
+            'maxBytes': 1024*1024*5,                  #文件大小
+            'backupCount': 5,                         #备份份数
+            'formatter':'standard',                   #使用哪种formatters日志格式
+        },
+        'error': {
+            'level':'ERROR',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/error.log',
+            'maxBytes':1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'request_handler': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/script.log',
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+        },
+        'scprits_handler': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename':'logs/script.log',
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['default', 'console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'django.request': {
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'scripts': {
+            'handlers': ['scprits_handler'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'blog.views': {
+            'handlers': ['default', 'error'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+    }
+}
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'

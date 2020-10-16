@@ -27,12 +27,20 @@ function onClickTabBar(obj){
 /*打开房屋信息添加窗口*/
 function openHousePopup(currentObj){
 	cleanHouseAddPopup();
-	if(currentObj.id == 'addHouseBtn'){
-		$('#houseForm').attr('method', 'post');
-		$('#houseForm').attr('action', 'newHouse');
-	}else if(currentObj.id == 'editHouseBtn'){
-		$('#houseForm').attr('method', 'post');
-		$('#houseForm').attr('action', "editHouse/" + currentInfo.id + "/");
+	let houseForm = $('#houseForm')
+	if(currentObj.id === 'addHouseBtn'){
+		houseForm.attr('method', 'post');
+		houseForm.attr('action', 'newHouse');
+		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+	}else if(currentObj.id === 'editHouseBtn'){
+		houseForm.attr('method', 'post');
+		houseForm.attr('action', "editHouse/" + currentInfo.id + "/");
+		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		manageHousePopupInfo();
+	}else if(currentObj.id === 'viewHouseBtn'){
+		houseForm.removeAttr('method');
+		houseForm.removeAttr('action');
+		houseForm.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
 		manageHousePopupInfo();
 	}
 	$('#popupMake').show();
@@ -525,11 +533,12 @@ function submitUser(){
 	$.ajax({
 		url: url,
 		type: 'post',
-		dataType: 'json',
+		dataType: 'text',
 		data: tempData,
 		success: function (response) {
-			if (response !== 'nullValue') {
-
+			response = JSON.parse(response);
+			if (response['status'] === 200) {
+				window.location.reload();
 			} else {
 				alert('保存失败');
 			}
@@ -547,8 +556,6 @@ function deleteUserInfo(){
 	r = confirm('确定删除<用户名>为<' + currentInfo.displayName + '>的用户数据吗？');
 	if(r === true){
 		window.location.href="deleteUser/" + currentInfo.id + "/";
-	}else{
-
 	}
 }
 /*关闭房屋信息添加窗口*/

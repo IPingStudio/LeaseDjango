@@ -101,7 +101,10 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
-        'POST': 3306
+        'POST': 3306,
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        }
     }
 }
 

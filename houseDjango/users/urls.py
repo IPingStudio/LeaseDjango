@@ -24,4 +24,5 @@ urlpatterns = [
     re_path(r'^searchUser/$', views.searchUser, name='searchUser'),
     re_path(r'^newUser/$', views.addUser, name='newUser'),
     re_path(r'^editUser/(?P<userID>\d+)/$', views.editUser, name='editUser'),
+    re_path(r'^deleteUser/(?P<userID>\d+)/$', views.deleteUser, name='deleteUser'),
 ]

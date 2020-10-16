@@ -8,9 +8,18 @@
 <title>租凭管理系统</title>
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load userTool %}
+<script type="text/javascript" src="/static/js/baseInit.js"></script>
+<!--<script type="text/javascript">
+	window.onload = function (){
+		// baseInit();
+	}
+</script>-->
 </head>
 <body>
 	<!-- Static navbar -->
+<!--	<input id="dictsData" type="hidden" data="{{ dicts }}" />-->
+<!--	<input id="userData" type="hidden" data="{{ user }}" />-->
 	<nav class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -18,16 +27,24 @@
 				data-toggle="collapse" data-target="#navbar"
 				aria-expanded="false" aria-controls="navbar">
 				</button>
-				<a class="navbar-brand" href="{% url 'houses:houses' %}">
-				房屋租凭管理系统</a>
+<!--				<a class="navbar-brand" href="{% url 'leases:leases' %}">房屋租凭管理系统</a>-->
+				<a class="navbar-brand">房屋租凭管理系统</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				{% if user.is_authenticated %}
 				<ul class="nav navbar-nav">
-					<li><a href="{% url 'houses:houses' %}">房屋信息管理</a></li>
-					<li><a href="{% url 'leases:leases' %}">租凭信息管理</a></li>
-					<li><a href="{% url 'realtys:realtys' %}">经纪信息管理</a></li>
-					<li><a href="{% url 'user:user' %}">用户信息管理</a></li>
+					{% if user.authority|authorityIndexOf:'房屋' %}
+					<li id="houseHref"><a href="{% url 'houses:houses' %}">房屋信息管理</a></li>
+					{% endif %}
+					{% if user.authority|authorityIndexOf:'租凭' %}
+					<li id="leaseHref"><a href="{% url 'leases:leases' %}">租凭信息管理</a></li>
+					{% endif %}
+					{% if user.authority|authorityIndexOf:'经纪' %}
+					<li id="realtyHref"><a href="{% url 'realtys:realtys' %}">经纪信息管理</a></li>
+					{% endif %}
+					{% if user.authority|authorityIndexOf:'用户' %}
+					<li id="userHref"><a href="{% url 'user:user' %}">用户信息管理</a></li>
+					{% endif %}
 				</ul>
 				{% endif %}
 				<ul class="nav navbar-nav navbar-right">
