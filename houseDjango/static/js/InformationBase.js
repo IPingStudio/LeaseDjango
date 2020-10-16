@@ -140,10 +140,11 @@ function infoTableTrClick(event){
 	if(currentInfo.hasOwnProperty('houseInfoJson')){
 		currentInfo['houseInfoJson'] = JSON.parse(currentInfo['houseInfoJson'])[0]['fields']
 	}
-	if(tableElm.getAttribute('id') == 'houseInformationTalbe'){
+	if(tableElm.getAttribute('id') === 'houseInformationTalbe'){
 		$('#editHouseBtn').removeAttr('disabled');
 		$('#delHouseBtn').removeAttr('disabled');
-	}else if(tableElm.getAttribute('id') == 'leaseInformationTalbe'){
+		$('#viewHouseBtn').removeAttr('disabled');
+	}else if(tableElm.getAttribute('id') === 'leaseInformationTalbe'){
 		$('#viewLeaseBtn').removeAttr('disabled');
 		$('#payBtn').removeAttr('disabled');
 		$('#editLeaseBtn').removeAttr('disabled');
@@ -152,13 +153,15 @@ function infoTableTrClick(event){
 		$('#backBtn').removeAttr('disabled');
 		$('#dayinBtn').removeAttr('disabled');
 		$('#imageBtn').removeAttr('disabled');
-	}else if(tableElm.getAttribute('id') == 'realtyInformationTalbe'){
+	}else if(tableElm.getAttribute('id') === 'realtyInformationTalbe'){
 		$('#editRealtyBtn').removeAttr('disabled');
 		$('#delRealtyBtn').removeAttr('disabled');
+		$('#viewRealtyBtn').removeAttr('disabled');
 		$('#printRealtyBtn').removeAttr('disabled');
-	}else if(tableElm.getAttribute('id') == 'userInformationTalbe'){
+	}else if(tableElm.getAttribute('id') === 'userInformationTalbe'){
 		$('#editUserBtn').removeAttr('disabled');
 		$('#delUserBtn').removeAttr('disabled');
+		$('#viewUserBtn').removeAttr('disabled');
 	}
 	for(var index = 0; index < tempTRs.length; index++){
 		tempTRs[index].style.backgroundColor = tempTRs[index].getAttribute("defaultColor");

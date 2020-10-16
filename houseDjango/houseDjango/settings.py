@@ -81,6 +81,7 @@ TEMPLATES = [
                 'userTool': 'users.templatetags.userTool',
                 'leaseTool': 'lease.templatetags.leaseTool',
                 'houseSimple': 'house.templatetags.houseSimple',
+                'realtyTool': 'realty.templatetags.realtyTool',
             }
         },
     },

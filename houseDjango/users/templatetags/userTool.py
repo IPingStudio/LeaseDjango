@@ -24,3 +24,20 @@ def authorityIndexOf(authority, typeStr):
             returnBoolean = True
             break
     return returnBoolean
+
+
+@register.filter
+def userAuthority(authority, typeStr):
+    returnBoolean = False
+    typeStr = typeStr + ''
+    userAuth = dict.objects.filter(type__label='用户权限')
+    dicID = []
+    for userAuthItem in userAuth:
+        if '用户' in userAuthItem.label and typeStr in userAuthItem.label:
+            dicID.append(userAuthItem.id)
+    for dicIDItem in dicID:
+        dicIDItem = str(dicIDItem)
+        if dicIDItem in authority:
+            returnBoolean = True
+            break
+    return returnBoolean

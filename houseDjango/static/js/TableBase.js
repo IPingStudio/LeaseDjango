@@ -27,20 +27,23 @@ function onClickTabBar(obj){
 /*打开房屋信息添加窗口*/
 function openHousePopup(currentObj){
 	cleanHouseAddPopup();
-	let houseForm = $('#houseForm')
+	let houseForm = $('#houseForm');
 	if(currentObj.id === 'addHouseBtn'){
 		houseForm.attr('method', 'post');
 		houseForm.attr('action', 'newHouse');
 		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
 	}else if(currentObj.id === 'editHouseBtn'){
 		houseForm.attr('method', 'post');
 		houseForm.attr('action', "editHouse/" + currentInfo.id + "/");
 		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
 		manageHousePopupInfo();
+		$('#formBtnDiv').show();
 	}else if(currentObj.id === 'viewHouseBtn'){
 		houseForm.removeAttr('method');
 		houseForm.removeAttr('action');
 		houseForm.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
+		$('#formBtnDiv').hide();
 		manageHousePopupInfo();
 	}
 	$('#popupMake').show();
@@ -428,12 +431,23 @@ function updateLeaseTable(leaseInfos){
 /*打开房屋信息添加窗口*/
 function openRealtyPopup(currentObj){
 	cleanRealtyAddPopup();
-	if(currentObj.id == 'addRealtyBtn'){
-		$('#realtyForm').attr('method', 'post');
-		$('#realtyForm').attr('action', 'newRealty');
-	}else if(currentObj.id == 'editRealtyBtn'){
-		$('#realtyForm').attr('method', 'post');
-		$('#realtyForm').attr('action', "editRealty/" + currentInfo.id + "/");
+	let realtyForm = $('#realtyForm');
+	if(currentObj.id === 'addRealtyBtn'){
+		realtyForm.attr('method', 'post');
+		realtyForm.attr('action', 'newRealty');
+		realtyForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+	}else if(currentObj.id === 'editRealtyBtn'){
+		realtyForm.attr('method', 'post');
+		realtyForm.attr('action', "editRealty/" + currentInfo.id + "/");
+		realtyForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		manageRealtyPopupInfo();
+	}else if(currentObj.id === 'viewRealtyBtn'){
+		realtyForm.removeAttr('method');
+		realtyForm.removeAttr('action');
+		realtyForm.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
+		$('#formBtnDiv').hide();
 		manageRealtyPopupInfo();
 	}
 	$('#popupMake').show();
@@ -482,9 +496,19 @@ function openUserPopup(currentObj){
 	if(currentObj.id === 'addUserBtn'){
 		userForm.attr('method', 'post');
 		userForm.attr('action', 'newUser/');
+		userForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
 	}else if(currentObj.id === 'editUserBtn'){
 		userForm.attr('method', 'post');
 		userForm.attr('action', "editUser/" + currentInfo.id + "/");
+		userForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		manageUserPopupInfo();
+	}else if(currentObj.id === 'viewUserBtn'){
+		userForm.removeAttr('method');
+		userForm.removeAttr('action');
+		userForm.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
+		$('#formBtnDiv').hide();
 		manageUserPopupInfo();
 	}
 	$('#popupMake').show();
