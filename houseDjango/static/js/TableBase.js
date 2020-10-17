@@ -517,6 +517,16 @@ function openUserPopup(currentObj){
 //	houseAddDiv.style.display = "block";
 }
 
+
+/*筛选用户权限*/
+function filterUserAuthority(){
+	let userFilterTxt = $('#id_user_permissions_input').text();
+	if(userFilterTxt === ''){
+		return '';
+	}
+
+
+}
 /*添加用户权限*/
 function userAuthorityAdd(){
 	let option = $('#user_authority_list option:selected');
