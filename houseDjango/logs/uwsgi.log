@@ -1,0 +1,39 @@
+*** Starting uWSGI 2.0.19.1 (64bit) on [Mon Oct 12 13:24:34 2020] ***
+compiled with version: 9.3.0 on 14 September 2020 01:06:22
+os: Linux-5.4.0-47-generic #51-Ubuntu SMP Fri Sep 4 19:50:52 UTC 2020
+nodename: chengzhouyun-VirtualBox
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /home/chengzhouyun/桌面
+writing pidfile to /home/chengzhouyun/www/houseDjango/houseDjango/uwsgi.pid
+detected binary path: /usr/local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/chengzhouyun/www/houseDjango/houseDjango
+your processes number limit is 7730
+your memory page size is 4096 bytes
+ *** WARNING: you have enabled harakiri without post buffering. Slow upload could be rejected on post-unbuffered webservers *** 
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 0.0.0.0:8090 fd 3
+Python version: 3.8.5 (default, Jul 28 2020, 12:59:40)  [GCC 9.3.0]
+PEP 405 virtualenv detected: /home/chengzhouyun/.virtualenvs/leaseDjango
+Set PythonHome to /home/chengzhouyun/.virtualenvs/leaseDjango
+Python main interpreter initialized at 0x562d74a77c30
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x562d74a77c30 pid: 28695 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28695)
+spawned uWSGI worker 1 (pid: 28697, cores: 2)
+spawned uWSGI worker 2 (pid: 28698, cores: 2)
+spawned uWSGI worker 3 (pid: 28699, cores: 2)
+spawned uWSGI worker 4 (pid: 28700, cores: 2)
+[{"model": "house.houseinfo", "pk": 1, "fields": {"houseID": "EE22-VE22-F111", "propertyID": "EFG1-GEE1-3333", "houseOwner": "张飞", "ownerPhone": "134553235455", "IDType": 82, "IDNum": "2324242424", "houseAdd": "海城市海州大街", "houseArea": 1333.0, "houseUse": 5, "houseStructure": 115, "landArea": 122.0, "propertyType": 95}}, {"model": "house.houseinfo", "pk": 2, "fields": {"houseID": "EF21-FFE1-2234", "propertyID": "4422-2311-FW13", "houseOwner": "周深", "ownerPhone": "13245667775", "IDType": 81, "IDNum": "2323232241122", "houseAdd": "海城市中心地带", "houseArea": 223.0, "houseUse": 3, "houseStructure": 116, "landArea": 442.0, "propertyType": 94}}, {"model": "house.houseinfo", "pk": 4, "fields": {"houseID": "FE23-SSE1-FGE3", "propertyID": "FCCE-FEAA-1111", "houseOwner": "杨广庆", "ownerPhone": "13849504033", "IDType": 81, "IDNum": "210381930494585903", "houseAdd": "海城市花溪地二期一楼底商", "houseArea": 203.0, "houseUse": 1, "houseStructure": 112, "landArea": 203.0, "propertyType": 94}}, {"model": "house.houseinfo", "pk": 5, "fields": {"houseID": "FEAQ-1123-CCAA", "propertyID": "ADCE-123D-VVCC", "houseOwner": "赵海澄", "ownerPhone": "138495221", "IDType": 84, "IDNum": "2342511112312451124", "houseAdd": "海城市海地名都北门", "houseArea": 231.0, "houseUse": 6, "houseStructure": 116, "landArea": 324.0, "propertyType": 96}}]
+[pid: 28699|app: 0|req: 1/1] 127.0.0.1 () {42 vars in 807 bytes} [Mon Oct 12 05:24:58 2020] GET / => generated 17575 bytes in 585 msecs (HTTP/1.1 200) 7 headers in 350 bytes (1 switches on core 0)
+[{"model": "house.houseinfo", "pk": 1, "fields": {"houseID": "EE22-VE22-F111", "propertyID": "EFG1-GEE1-3333", "houseOwner": "张飞", "ownerPhone": "134553235455", "IDType": 82, "IDNum": "2324242424", "houseAdd": "海城市海州大街", "houseArea": 1333.0, "houseUse": 5, "houseStructure": 115, "landArea": 122.0, "propertyType": 95}}, {"model": "house.houseinfo", "pk": 2, "fields": {"houseID": "EF21-FFE1-2234", "propertyID": "4422-2311-FW13", "houseOwner": "周深", "ownerPhone": "13245667775", "IDType": 81, "IDNum": "2323232241122", "houseAdd": "海城市中心地带", "houseArea": 223.0, "houseUse": 3, "houseStructure": 116, "landArea": 442.0, "propertyType": 94}}, {"model": "house.houseinfo", "pk": 4, "fields": {"houseID": "FE23-SSE1-FGE3", "propertyID": "FCCE-FEAA-1111", "houseOwner": "杨广庆", "ownerPhone": "13849504033", "IDType": 81, "IDNum": "210381930494585903", "houseAdd": "海城市花溪地二期一楼底商", "houseArea": 203.0, "houseUse": 1, "houseStructure": 112, "landArea": 203.0, "propertyType": 94}}, {"model": "house.houseinfo", "pk": 5, "fields": {"houseID": "FEAQ-1123-CCAA", "propertyID": "ADCE-123D-VVCC", "houseOwner": "赵海澄", "ownerPhone": "138495221", "IDType": 84, "IDNum": "2342511112312451124", "houseAdd": "海城市海地名都北门", "houseArea": 231.0, "houseUse": 6, "houseStructure": 116, "landArea": 324.0, "propertyType": 96}}]
+[pid: 28699|app: 0|req: 2/2] 127.0.0.1 () {44 vars in 850 bytes} [Mon Oct 12 05:36:31 2020] GET / => generated 17575 bytes in 276 msecs (HTTP/1.1 200) 7 headers in 350 bytes (1 switches on core 1)
