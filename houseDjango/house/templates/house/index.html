@@ -33,10 +33,12 @@
 	<div id="houseTableDiv" class="table-responsive">
 		<div>
 			{% if user.authority|houseAuthority:'增删改' %}
-			<input id="addHouseBtn" class="btn btn-primary btn-lg" type="button" onClick="openHousePopup(this);" value="添加房屋信息"/>
-			<input id="editHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openHousePopup(this);" value="修改"/>
+			<input id="addHouseBtn" class="btn btn-primary btn-lg" type="button" onClick="openHousePopup(this.id);" value="添加房屋信息"/>
+			<input id="editHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openHousePopup(this.id);" value="修改"/>
 			{% endif %}
-			<input id="viewHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openHousePopup(this);" value="查看"/>
+			{% if user.authority|houseAuthority:'查看' %}
+			<input id="viewHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openHousePopup(this.id);" value="查看"/>
+			{% endif %}
 			{% if user.authority|houseAuthority:'增删改' %}
 			<input id="delHouseBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="deleteHouseInfo()" value="删除"/>
 			{% endif %}

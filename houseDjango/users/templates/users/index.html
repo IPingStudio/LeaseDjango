@@ -37,7 +37,9 @@
 			<input id="addUserBtn" class="btn btn-primary btn-lg" type="button" onClick="openUserPopup(this);" value="添加用户信息"/>
 			<input id="editUserBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openUserPopup(this);" value="修改"/>
 			{% endif %}
+			{% if user.authority|userAuthority:'查看' %}
 			<input id="viewUserBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openUserPopup(this);" value="查看"/>
+			{% endif %}
 			{% if user.authority|userAuthority:'增删改' %}
 			<input id="delUserBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="deleteUserInfo()" value="删除"/>
 			{% endif %}

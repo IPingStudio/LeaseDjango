@@ -36,7 +36,9 @@
 			<input id="addRealtyBtn" class="btn btn-primary btn-lg" type="button" onClick="openRealtyPopup(this);" value="添加房地产经纪"/>
 			<input id="editRealtyBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onclick="openRealtyPopup(this);" value="修改"/>
 			{% endif %}
+			{% if user.authority|realtyAuthority:'查看' %}
 			<input id="viewRealtyBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onClick="openRealtyPopup(this);" value="查看"/>
+			{% endif %}
 			{% if user.authority|realtyAuthority:'增删改' %}
 			<input id="delRealtyBtn" class="btn btn-primary btn-lg" type="button" disabled="disabled" onclick="deleteRealtyInfo()" value="删除"/>
 			{% endif %}

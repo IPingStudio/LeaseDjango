@@ -3,7 +3,7 @@
 var leaseHouseInfo;
 /*触发页签交换*/
 function onClickTabBar(obj){
-	if(obj.getAttribute("status") != "select"){
+	if(obj.getAttribute("status") !== "select"){
 		var currentUl = obj.parentElement;
 		var currentDivs = currentUl.getElementsByTagName("div");
 		for(var index = 0; index < currentDivs.length; index++){
@@ -14,10 +14,10 @@ function onClickTabBar(obj){
 		var tempValue = obj.getAttribute("value");
 		var houseinfoDiv = $("#houseTableDiv")[0];
 		var leaseinfoDiv = $("#leaseTableDiv")[0];
-		if(tempValue == "realtyInfo"){
+		if(tempValue === "realtyInfo"){
 			houseinfoDiv.style.display = "block";
 			leaseinfoDiv.style.display = "none";
-		}else if(tempValue == "lease"){
+		}else if(tempValue === "lease"){
 			houseinfoDiv.style.display = "none";
 			leaseinfoDiv.style.display = "block";
 		}
@@ -25,21 +25,21 @@ function onClickTabBar(obj){
 }
 
 /*打开房屋信息添加窗口*/
-function openHousePopup(currentObj){
+function openHousePopup(currentObjID){
 	cleanHouseAddPopup();
 	let houseForm = $('#houseForm');
-	if(currentObj.id === 'addHouseBtn'){
+	if(currentObjID === 'addHouseBtn'){
 		houseForm.attr('method', 'post');
 		houseForm.attr('action', 'newHouse');
 		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
 		$('#formBtnDiv').show();
-	}else if(currentObj.id === 'editHouseBtn'){
+	}else if(currentObjID === 'editHouseBtn'){
 		houseForm.attr('method', 'post');
 		houseForm.attr('action', "editHouse/" + currentInfo.id + "/");
 		houseForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
 		manageHousePopupInfo();
 		$('#formBtnDiv').show();
-	}else if(currentObj.id === 'viewHouseBtn'){
+	}else if(currentObjID === 'viewHouseBtn'){
 		houseForm.removeAttr('method');
 		houseForm.removeAttr('action');
 		houseForm.find('input, select, textarea').not('.disabled').attr('disabled', 'disabled');
@@ -265,14 +265,18 @@ function submitHouse(){
 	})
 }
 function submitOnClick(typeLabel){
+	let notEditStatus = ['已审批'];
 	var tempData = $('#leaseForm').serialize();
 	var urlStr = $('#leaseForm').attr('action');
 	var dicValue;
 	for(var index = 0; index < dics['leaseStatus'].length; index++){
 		var tempob = dics['leaseStatus'][index];
+		if(currentInfo.leaseStatus === tempob.id && notEditStatus.indexOf(tempob.label) !== -1){
+			alert('只可以修改<状态>为<草稿箱,未审批,未复审>的记录！')
+			return
+		}
 		if(tempob.label == typeLabel){
 			dicValue = tempob.id;
-			break;
 		}
 	}
 	if(urlStr == 'editLease'){
@@ -421,7 +425,8 @@ function updateLeaseTable(leaseInfos){
 			tempTr.appendChild(tempTd);
 		}
 		tempTr.addEventListener("click", infoTableTrClick);
-		
+		tempTr.addEventListener("dblclick", doubleClickTr);
+
 		tableBody.appendChild(tempTr);
 		
 		tempTr.setAttribute("defaultColor", tempTr.style.backgroundColor);

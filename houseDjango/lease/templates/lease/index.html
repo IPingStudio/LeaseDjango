@@ -36,8 +36,10 @@
 			{% if user.authority|leaseAuthority:'增删改' %}
 			<input id="addLeaseBtn" class="btn btn-primary btn-lg" onClick="openLeasePopup(this);" value="添加租凭信息"/>
 			{% endif %}
+			{% if user.authority|leaseAuthority:'查看' %}
 			<input id="viewLeaseBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="openLeasePopup(this);" value="查看"/>
-			<input id="payBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="" value="缴费"/>
+			{% endif %}
+<!--			<input id="payBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="" value="缴费"/>-->
 			{% if user.authority|leaseAuthority:'增删改' %}
 			<input id="editLeaseBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="openLeasePopup(this);" value="变更"/>
 			<input id="logOutBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="deleteLeaseInfo()" value="注销"/>
@@ -47,35 +49,11 @@
 			<input id="backBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="openLeasePopup(this);" value="退回"/>
 			{% endif %}
 			<input id="dayinBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="$('#printManageDiv').show();" value="打印"/>
-			<input id="imageBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="" value="图片"/>
+<!--			<input id="imageBtn" class="btn btn-primary btn-lg" type="button" disabled="true" onClick="" value="图片"/>-->
 		</div>
 		<div style="display: block;">
 			<label>租凭状态:</label>
 			<select id="statusQuery" type="searchSelect"></select>
-			<!--<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="1" checked="True"/>
-				<label class="custom-control-label">全部</label>
-			</div>
-			<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="2"/>
-				<label class="custom-control-label">未复审</label>
-			</div>
-			<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="3"/>
-				<label class="custom-control-label">未审批</label>
-			</div>
-			<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="4"/>
-				<label class="custom-control-label">已审批</label>
-			</div>
-			<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="5"/>
-				<label class="custom-control-label">到期信息</label>
-			</div>
-			<div style="display: inline-block;" class="custom-control custom-radio">
-				<input type="radio" class="custom-control-input" name="statusRadio" onChange="" value="6"/>
-				<label class="custom-control-label">草稿箱</label>
-			</div>-->
 			<span style="width: 20px;"></span>
 			<div style="display: inline-block;">
 				<input class="form-control" id="serachHouseIDTxt" type="text"/>

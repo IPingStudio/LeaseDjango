@@ -1,7 +1,14 @@
 from django.db import models
 
 
+from users.models import userProfile
 # Create your models here.
+
+
+def get_superUser():
+    superUser = userProfile.objects.get(username='chengzhouyun')
+    return superUser.id
+
 
 class houseInfo(models.Model):
     # 房屋信息
@@ -17,10 +24,15 @@ class houseInfo(models.Model):
     houseStructure = models.IntegerField('房屋结构', help_text='房屋结构_Dict')
     landArea = models.FloatField('占地面积', max_length=10, help_text='占地面积')
     propertyType = models.IntegerField('产别', help_text='产别')
+    addUser = models.ForeignKey(userProfile, on_delete=models.SET_DEFAULT, default=get_superUser)
 
     class Meta:
         db_table = 'house_info'
         verbose_name = '房屋信息'
         verbose_name_plural = '房屋信息'
+
     def __str__(self):
         return self.houseID + "  " + self.houseOwner
+
+
+

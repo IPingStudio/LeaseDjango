@@ -16,10 +16,10 @@ function manageHouseInfoData(){
 			var thData = currentTH.getAttribute("data");
 			if(dataJson.hasOwnProperty(thData)){
 				var dicType = currentTH.getAttribute('dictType');
-				if(dicType && dicType != ''){
+				if(dicType && dicType !== ''){
 					for(var dicIndex = 0; dicIndex < dics[dicType].length; dicIndex++){
 						var currentdic = dics[dicType][dicIndex];
-						if(dataJson[thData] == currentdic.id){
+						if(dataJson[thData] === currentdic.id){
 							tempTd.innerHTML = currentdic.label;
 							break;
 						}
@@ -31,7 +31,9 @@ function manageHouseInfoData(){
 			tempTr.appendChild(tempTd);
 		}
 		tempTr.addEventListener("click", infoTableTrClick);
-		
+		tempTr.addEventListener("dblclick", doubleClickTr);
+		// tempTr.dblclick = openHousePopup('editHouseBtn');
+
 		tableBody.appendChild(tempTr);
 		
 		tempTr.setAttribute("defaultColor", tempTr.style.backgroundColor);
@@ -84,7 +86,7 @@ function manageUserInfoData(){
 			tempTr.appendChild(tempTd);
 		}
 		tempTr.addEventListener("click", infoTableTrClick);
-
+		tempTr.addEventListener("dblclick", doubleClickTr);
 		tableBody.appendChild(tempTr);
 
 		tempTr.setAttribute("defaultColor", tempTr.style.backgroundColor);
@@ -122,7 +124,7 @@ function manageRealtyInfoData(){
 			tempTr.appendChild(tempTd);
 		}
 		tempTr.addEventListener("click", infoTableTrClick);
-
+		tempTr.addEventListener("dblclick", doubleClickTr);
 		tableBody.appendChild(tempTr);
 
 		tempTr.setAttribute("defaultColor", tempTr.style.backgroundColor);
@@ -168,6 +170,53 @@ function infoTableTrClick(event){
 	}
 	tempTr.style.backgroundColor = "skyblue";
 }
+
+/*双击打开编辑窗口*/
+function doubleClickTr(event){
+	let tempTr = event.currentTarget;
+	let currentData = tempTr.getAttribute('data').replace(/'/g, '\"');
+
+	currentInfo = $.parseJSON(currentData);
+
+	cleanHouseAddPopup();
+	let currentForm;
+	$('#popupMake').show();
+	if(modelName === 'house'){
+		currentForm = $('#houseForm');
+		manageHousePopupInfo();
+		currentForm.attr('method', 'post');
+		currentForm.attr('action', "editHouse/" + currentInfo.id + "/");
+		currentForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		$('#houseAddDiv').show();
+	}else if(modelName === 'lease'){
+		$('#shenPiBtnDiv').hide();
+		$('#tuiHuiBtnDiv').hide();
+		currentForm = $('#leaseForm');
+		manageLeasePopupInfo();
+		currentForm.attr('method', 'post');
+		currentForm.attr('action', "editLease/" + currentInfo.id + "/");
+		currentForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		$('#leaseAddDiv').show();
+	}else if(modelName === 'realty'){
+		currentForm = $('#realtyForm');
+		manageRealtyPopupInfo();
+		currentForm.attr('method', 'post');
+		currentForm.attr('action', "editRealty/" + currentInfo.id + "/");
+		currentForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		$('#realtyAddDiv').show();
+	}else if(modelName === 'user'){
+		currentForm = $('#userForm');
+		manageUserPopupInfo();
+		currentForm.attr('method', 'post');
+		currentForm.attr('action', "editUser/" + currentInfo.id + "/");
+		currentForm.find('input, select, textarea').not('.disabled').removeAttr('disabled');
+		$('#formBtnDiv').show();
+		$('#userAddDiv').show();
+	}
+}
 /*处理获取租凭信息数据*/
 function manageLeaseInfoData(){
 	var tableElm = $("#leaseInformationTalbe")[0];
@@ -205,7 +254,7 @@ function manageLeaseInfoData(){
 			tempTr.appendChild(tempTd);
 		}
 		tempTr.addEventListener("click", infoTableTrClick);
-		
+		tempTr.addEventListener("dblclick", doubleClickTr);
 		tableBody.appendChild(tempTr);
 		
 		tempTr.setAttribute("defaultColor", tempTr.style.backgroundColor);
