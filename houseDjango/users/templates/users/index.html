@@ -96,28 +96,28 @@
 				<div class="row">
 					<div class="col-md-6">
 						<label>用户权限:</label>
-						<div class="user_authority_container">
-							<div class="selector-chosen user_authority">
+						<div class="" style="display: flex; width: 100%;">
+							<div class="user_authority" style="width: 300px;">
 								<label>可用 用户权限</label>
 								<p id="id_user_permissions_filter" class="selector-filter">
 									<input type="text" placeholder="过滤" id="id_user_permissions_input" onmousedown="filterUserAuthority();">
 								</p>
 								<select name="user_permissions_list" id="user_authority_list"
-										multiple="" class="filtered" style="width: 230px; height: 170px;">
+										multiple="" class="filtered" style="width: 270px; height: 170px;">
 								</select>
 								<!--<a title="点击选择全部用户权限。" href="#" id="id_user_permissions_add_all_link"
 								   class="selector-chooseall active">全选</a>-->
 							</div>
-							<ul class="selector-chooser user_authority" style="list-style: none;">
-								<li><a title="选择" id="id_user_permissions_add_link"
-									   class="selector-add active" onclick="userAuthorityAdd();">选择》</a></li>
-								<li><a title="删除" id="id_user_permissions_remove_link"
-									   class="selector-remove" onclick="userAuthorityDel();">《删除</a></li>
-							</ul>
-							<div class="selector-chosen user_authority">
+							<div class="user_authority" style="list-style: none; width: 100px;">
+								<a title="选择" id="id_user_permissions_add_link"
+									   class="selector-add active" onclick="userAuthorityAdd();">选择》</a>
+								<a title="删除" id="id_user_permissions_remove_link"
+									   class="selector-remove" onclick="userAuthorityDel();">《删除</a>
+							</div>
+							<div class="user_authority">
 								<label>选中的 用户权限</label>
 								<select id="user_authority" multiple="" size="0"
-										name="user_permissions" class="filtered" style="width: 230px; height: 170px;">
+										name="user_permissions" class="filtered" style="width: 270px; height: 210px;">
 								</select>
 								<!--<a title="删除所有已选择的用户权限。" href=""
 								   id="id_user_permissions_remove_all_link"

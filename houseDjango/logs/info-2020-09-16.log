@@ -1,2 +1,0 @@
-[2020-09-16 15:24:55,820] [views.py:17] [views:showHouses] [INFO]- 请求成功！ response_code:{}；response_headers:{}；response_body:{}
-[2020-09-16 15:24:55,823] [views.py:19] [views:showHouses] [ERROR]- 请求出错：{}

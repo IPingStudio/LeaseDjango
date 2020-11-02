@@ -45,7 +45,7 @@ def addHouse(request):
             currentForm = form.save(commit=False)
             currentForm.addUser = request.user
             currentForm.save()
-            ModelAdmin.log_addition(request, currentForm, '添加房屋信息')
+            # ModelAdmin.log_addition(request, currentForm, '添加房屋信息')
             return HttpResponseRedirect(reverse('houses:houses'), status=200)
         else:
             error = form.errors

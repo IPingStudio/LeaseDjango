@@ -209,6 +209,7 @@ function doubleClickTr(event){
 		$('#realtyAddDiv').show();
 	}else if(modelName === 'user'){
 		currentForm = $('#userForm');
+		setUserPopup();
 		manageUserPopupInfo();
 		currentForm.attr('method', 'post');
 		currentForm.attr('action', "editUser/" + currentInfo.id + "/");

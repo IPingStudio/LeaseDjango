@@ -12,14 +12,18 @@ from tools.query import getDict
 
 from tools.query import queryLeaseByGet
 import json
+import logging
 import time
 
 # Create your views here.
+
+logger = logging.getLogger('django')
 queryHouseDic = {}
 @login_required
 def showLeases(request):
-    leaseInfos = queryLeaseByGet(leaseInfo, request.GET)
+    leaseInfos = queryLeaseByGet(leaseInfo, request)
 
+    logger.info('search leases!')
     context = {'leaseInfos': leaseInfos, "dicts": getDict()}
     # context = {'leaseInfos': getLeaseInfo(), "dicts": getDict()}
     return render(request, 'lease/index.html', context)
@@ -30,7 +34,7 @@ def showLeases(request):
 @csrf_exempt
 def queryLeaseInfos(request):
     # 查询租凭信息
-    leaseInfos = queryLeaseByGet(leaseInfo, request.GET)
+    leaseInfos = queryLeaseByGet(leaseInfo, request)
 
     context = {'leaseInfos': leaseInfos}
     return HttpResponse(json.dumps(context))

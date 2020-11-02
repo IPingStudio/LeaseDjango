@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.conf.urls import url,include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +28,4 @@ urlpatterns = [
     re_path(r'^lease/', include(('lease.urls', 'leases'), namespace='leases')),
     re_path(r'^print/', include(('print.urls', 'print'), namespace='print')),
     re_path(r'^realty/', include(('realty.urls', 'realtys'), namespace='realtys'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

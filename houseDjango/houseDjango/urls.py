@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views import static ##新增
+from django.conf.urls.static import static as staticDef
 from django.conf import settings ##新增
 from django.conf.urls import url ##新增
 
@@ -30,4 +31,4 @@ urlpatterns = [
     re_path(r'^print/', include(('print.urls', 'print'), namespace='print')),
     re_path(r'^realty/', include(('realty.urls', 'realtys'), namespace='realtys')),
     url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static')
-]
+] + staticDef(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

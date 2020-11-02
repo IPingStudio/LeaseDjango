@@ -5,15 +5,15 @@ import json
 from dicts.models import dict, dictType
 
 
-def queryLeaseByGet(Models, getData):
+def queryLeaseByGet(Models, requestObj):
     queryContext = {}
-    leaseStatus = getData.get('leaseStatus')
+    leaseStatus = requestObj.GET.get('leaseStatus')
     # 处理查询字段
     if leaseStatus:
         if leaseStatus != '0' and leaseStatus != '-1':
             queryContext['leaseStatus'] = int(leaseStatus)
 
-    houseID = getData.get('houseID')
+    houseID = requestObj.GET.get('houseID')
     if houseID:
         house = houseInfo.objects.get(houseID=houseID)
         houseID = house.id
@@ -21,6 +21,11 @@ def queryLeaseByGet(Models, getData):
         # for item in realtyInfo:
         #     listID.append(item.id)
         queryContext['houseInfo'] = houseID
+
+    currentUser = requestObj.user
+    if currentUser:
+        userID = currentUser.id
+        queryContext['addUser'] = userID
 
     if queryContext:
         leaseInfos = Models.objects.filter(**queryContext)

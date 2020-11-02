@@ -89,7 +89,63 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'houseDjango.wsgi.application'
 
-
+#日志
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    # 'filters': {
+    #     'special': {
+    #         '()': 'project.logging.SpecialFilter',
+    #         'foo': 'bar',
+    #     },
+    #     'require_debug_true': {
+    #         '()': 'django.utils.log.RequireDebugTrue',
+    #     },
+    # },
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'static/infoLog.log'),
+        },
+        'console': {
+            'level': 'INFO',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            # 'filters': ['special']
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'myproject.custom': {
+            'handlers': ['console', 'mail_admins', 'file'],
+            'level': 'INFO',
+            # 'filters': ['special']
+        }
+    }
+}
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -148,6 +204,7 @@ USE_L10N = True
 USE_TZ = False
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_URL = '/user/login/'
 
 AUTH_USER_MODEL = 'users.userProfile'

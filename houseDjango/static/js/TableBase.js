@@ -1,6 +1,7 @@
 /*create by haoran on 2020.09.04*/
 /*添加租凭信息时选择的房屋信息*/
 var leaseHouseInfo;
+let currentUserAuthOptions;
 /*触发页签交换*/
 function onClickTabBar(obj){
 	if(obj.getAttribute("status") !== "select"){
@@ -526,11 +527,19 @@ function openUserPopup(currentObj){
 /*筛选用户权限*/
 function filterUserAuthority(){
 	let userFilterTxt = $('#id_user_permissions_input').text();
+	let userPermissionsList = $('#user_permissions_list');
+	// let userPermissionsOptions = $('#user_permissions_list option');
+	$(userPermissionsList).empty();
 	if(userFilterTxt === ''){
-		return '';
+		$(userPermissionsList).options = $(currentUserAuthOptions);
+	}else{
+		for(let opIndex = 0; opIndex < $(currentUserAuthOptions).length; opIndex++){
+			let currentOption = $(currentUserAuthOptions)[opIndex];
+			if(currentOption.text.indexOf(userFilterTxt) !== -1){
+				$(userPermissionsList).append(currentOption);
+			}
+		}
 	}
-
-
 }
 /*添加用户权限*/
 function userAuthorityAdd(){
@@ -542,6 +551,8 @@ function userAuthorityAdd(){
 	$(option).removeAttr('selected');
 	$(option).remove();
 	$(userAuthrityEle).append($(option));
+
+	currentUserAuthOptions = $('#user_authority_list').options;
 }
 
 /*删除用户权限*/
@@ -554,6 +565,8 @@ function userAuthorityDel(){
 	$(option).removeAttr('selected');
 	$(option).remove();
 	$(userAuthrityEle).append($(option));
+
+	currentUserAuthOptions = $(userAuthrityEle).options;
 }
 
 /*提交用户信息*/
@@ -631,6 +644,8 @@ function manageUserPopupInfo(){
 			for(let optionIndex = 0; optionIndex < currentOptions.length; optionIndex++){
 				$(userAuthorityEle).append(currentOptions[optionIndex]);
 			}
+
+			currentUserAuthOptions = currentOptions;
 		}
 		manageInputElementValue(item, currentInfo[item]);
 	}
@@ -649,6 +664,7 @@ function setUserPopup(){
 		$(tempOp).html(obj['label']);
 		$(userAuthoritySelect).append(tempOp);
 	}
+	currentUserAuthOptions = $(userAuthoritySelect).options;
 }
 
 /*清理房屋信息添加窗口*/
@@ -681,7 +697,7 @@ function getHouseInfoByKey(keyStr, valueElementIDStr){
 		   keyValue:keyV
 		},
 		success:function(response){
-			if(response == 'nullValue'){
+			if(response === 'nullValue'){
 				return;
 			}
 			var responseObj = JSON.parse(response);
@@ -696,5 +712,5 @@ function getHouseInfoByKey(keyStr, valueElementIDStr){
 		error:function(error){
 			  console.log(error)
 		}
-		})
+	})
 }
